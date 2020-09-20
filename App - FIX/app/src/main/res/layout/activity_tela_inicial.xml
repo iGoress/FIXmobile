@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TelaInicialActivity">
+    <include layout="@layout/toolbar"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"/>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"></ProgressBar>
+
+    <Button
+        android:id="@+id/btnClinicas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorRosa"
+        android:textColor="@color/colorBranco"
+        android:text="Clínicas" />
+
+    <Button
+        android:id="@+id/btnUsuarios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorRosa"
+        android:textColor="@color/colorBranco"
+        android:layout_marginTop="10dp"
+        android:text="Usuários" />
+
+    <Button
+        android:id="@+id/btnContato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorRosa"
+        android:layout_marginTop="10dp"
+        android:text="Contato"
+        android:textColor="@color/colorBranco" />
+
+</LinearLayout>
