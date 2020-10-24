@@ -1,2 +1,0 @@
-# FIXmobile
-Projeto Kotlin 

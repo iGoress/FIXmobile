@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"></ProgressBar>
 
-    <Button
+  <!--  <Button
         android:id="@+id/btnClinicas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
         android:background="@color/colorRosa"
         android:layout_marginTop="10dp"
         android:text="Empresas"
-        android:textColor="@color/colorBranco" />
+        android:textColor="@color/colorBranco" /> -->
 </LinearLayout>
     <!--Menu lateral-->
     <com.google.android.material.navigation.NavigationView

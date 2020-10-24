@@ -21,18 +21,20 @@ import kotlin.concurrent.schedule
 
 
 
-class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+open class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val context: Context get() = this
     private var empresas = listOf<Empresas>()
+    private var REQUEST_REMOVE= 2
+    private var REQUEST_CADASTRO = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_inicial)
 
-        val botaoClinicas = btnClinicas.text.toString()
-        val botaoUsuarios = btnUsuarios.text.toString()
-        val botaoContato = btnContato.text.toString()
-        val botaoEmpresas = btnEmpresas.text.toString()
+       // val botaoClinicas = btnClinicas.text.toString()
+       // val botaoUsuarios = btnUsuarios.text.toString()
+        //val botaoContato = btnContato.text.toString()
+        //val botaoEmpresas = btnEmpresas.text.toString()
         val args = intent.extras
         val nome = args?.getString("nome_usuario")
         Toast.makeText(this, "Usuário: $nome", Toast.LENGTH_LONG).show()
@@ -42,21 +44,21 @@ class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         supportActionBar?.title = ""
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        btnClinicas.setOnClickListener{
-            var intent = Intent(this, TextoActionBarActivity::class.java)
-            intent.putExtra("texto_actionBar", botaoClinicas)
-            startActivity(intent)
-        }
-        btnUsuarios.setOnClickListener{
-            var intent = Intent(this, TextoActionBarActivity::class.java)
-            intent.putExtra("texto_actionBar", botaoUsuarios)
-            startActivity(intent)
-        }
-        btnContato.setOnClickListener{
-            var intent = Intent(this, TextoActionBarActivity::class.java)
-            intent.putExtra("texto_actionBar", botaoContato)
-            startActivity(intent)
-        }
+        //btnClinicas.setOnClickListener{
+          //  var intent = Intent(this, TextoActionBarActivity::class.java)
+            //intent.putExtra("texto_actionBar", botaoClinicas)
+            //startActivity(intent)
+        //}
+        //btnUsuarios.setOnClickListener{
+          //  var intent = Intent(this, TextoActionBarActivity::class.java)
+            //intent.putExtra("texto_actionBar", botaoUsuarios)
+            //tartActivity(intent)
+        //}
+        //btnContato.setOnClickListener{
+          //  var intent = Intent(this, TextoActionBarActivity::class.java)
+            //intent.putExtra("texto_actionBar", botaoContato)
+            //startActivity(intent)
+        //}
 
 
         configuraMenuLateral()
@@ -72,9 +74,13 @@ class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         taskEmpresas()
     }
     fun taskEmpresas() {
-        this.empresas = EmpresaService.getEmpresas(context)
-        // atualizar lista
-        recyclerEmpresas?.adapter = EmpresaAdapter(empresas) {onClickEmpresa(it)}
+        Thread {
+            this.empresas = EmpresaService.getEmpresas(context)
+            runOnUiThread {
+                // atualizar lista
+                recyclerEmpresas?.adapter = EmpresaAdapter(empresas) { onClickEmpresa(it) }
+            }
+        }.start()
     }
 
     // tratamento do evento de clicar em uma empresa
@@ -82,7 +88,7 @@ class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         Toast.makeText(context, "Clicou empresa ${empresa.nome}", Toast.LENGTH_SHORT).show()
         val intent = Intent(context, EmpresaActivity::class.java)
         intent.putExtra("empresa", empresa)
-        startActivity(intent)
+        startActivityForResult(intent, REQUEST_REMOVE)
     }
 
     // configuraçao do navigation Drawer com a toolbar
@@ -156,7 +162,19 @@ class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             Timer("SettingUp", false).schedule(6000){
                 progress_bar.visibility = View.INVISIBLE
             }
+        }else if (id == R.id.action_adicionar) {
+            // iniciar activity de cadastro
+            val intent = Intent(context, EmpresaCadastroActivity::class.java)
+            startActivityForResult(intent, REQUEST_CADASTRO)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    // esperar o retorno do cadastro da disciplina
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CADASTRO || requestCode == REQUEST_REMOVE ) {
+            // atualizar lista de disciplinas
+            taskEmpresas()
+        }
     }
 }
