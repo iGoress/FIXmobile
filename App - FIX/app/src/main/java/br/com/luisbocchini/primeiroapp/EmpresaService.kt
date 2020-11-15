@@ -38,6 +38,22 @@ object EmpresaService {
             //return DatabaseManager.getDisciplinaDAO().findAll()
         }
     }
+
+    fun getEmpresa (context: Context, id: Long): Empresas? {
+
+        if (AndroidUtils.isInternetDisponivel()) {
+            val url = "$host/disciplinas/${id}"
+            val json = HttpHelper.get(url)
+            val disciplina = parserJson<Empresas>(json)
+
+            return disciplina
+        } else {
+            val dao = DatabaseManager.getDisciplinaDAO()
+            val disciplina = dao.getById(id)
+            return disciplina
+        }
+
+    }
     fun save(disciplina: Empresas): Response {
         if (AndroidUtils.isInternetDisponivel()) {
             val json = HttpHelper.post("$host/empresas", disciplina.toJson())

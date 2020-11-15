@@ -22,8 +22,6 @@ class EmpresaCadastroActivity : DebugActivity() {
             }else{
                 taskAtualizar(empresa)
             }
-
-
         }
     }
 

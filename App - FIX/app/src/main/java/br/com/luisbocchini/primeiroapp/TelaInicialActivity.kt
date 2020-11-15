@@ -79,8 +79,18 @@ open class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigatio
             runOnUiThread {
                 // atualizar lista
                 recyclerEmpresas?.adapter = EmpresaAdapter(empresas) { onClickEmpresa(it) }
+                enviaNotificacao(this.empresas.get(0))
             }
         }.start()
+    }
+
+    fun enviaNotificacao(empresa: Empresas) {
+        // Intent para abrir tela quando clicar na notificação
+        val intent = Intent(this, EmpresaActivity::class.java)
+        // parâmetros extras
+        intent.putExtra("Empresa", empresa)
+        // Disparar notificação
+        NotificationUtil.create(this, 1, intent, "FIX", "Você tem nova atividade na ${empresa.nome}")
     }
 
     // tratamento do evento de clicar em uma empresa

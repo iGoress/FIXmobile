@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "43115397096",
+    "firebase_url": "https://app-fix.firebaseio.com",
+    "project_id": "app-fix",
+    "storage_bucket": "app-fix.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43115397096:android:6159e1dd6f07c06167ee5d",
+        "android_client_info": {
+          "package_name": "br.com.luisbocchini.primeiroapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43115397096-qkurbcmlp0osovirjsi5h6mshkdr28l3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0Rk69AhZ6gpdrh6pM8YFhNkNFGhnxed0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43115397096-qkurbcmlp0osovirjsi5h6mshkdr28l3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
